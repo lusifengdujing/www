@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>main</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<div>
+	<div class="title">表格上传文件</div>
+	<form action="/node/upload" method="post" enctype="multipart/form-data">
+    <input id="files" type="file" name="file" multiple/> <!-- 这里的multiple属性是允许多文件上传的，单文件上传可以不写此属性（最好都写上）-->
+    <input type="submit" value="上传"/>
+	</form>
+
+	
+	
+	<br /><br /><br />
+	
+    <form id="form1" method="post" action="/node/readin" >                   
+			设备:<input type="text" name="device" /><br />
+			变量 &nbsp&nbsp&nbsp&nbsp类型&nbsp&nbsp&nbsp&nbsp地址 <br>
+			<input type="text" name="var" /><input type="text" name="type" /><input type="text" name="address" /></br>
+            <input type="text" name="var" /><input type="text" name="type" /><input type="text" name="address" /></br>
+			<input type="text" name="var" /><input type="text" name="type" /><input type="text" name="address" /></br>
+            <input type="submit" value="提交" />        
+    </form>
+		
+	<script src="/scripts/jquery.min.js"></script>
+	<script>
+	$('.single .submit').on('click',function(){
+            var fileList = $('#singleFile')[0].files;
+            console.log(fileList);
+            var formData = new FormData();
+            formData.append('singleFile', fileList[0]);
+            $.ajax({
+                url: '/node/single',
+                type:'post',
+                processData:false,
+                contentType:false,
+                data: formData,
+                success: function(data){
+                    console.log(data)
+                }
+            })
+        });        
+	</script>
+</div>
+</body>
+</html>
