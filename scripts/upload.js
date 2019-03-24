@@ -1,20 +1,11 @@
-// let xlsx2json = require("node-xlsx");
-//使用ejsexcel读取excel文件  npm install ejsexcel --save
-let XLSX=require('xlsx');
-let fs=require('fs');
-let path = require('path');
-let handleExcel=require('./handleExcel.js')
-
-
-let upload=(req,res)=>{
+//打印上传excel文件信息
+let upload=(req,res,next)=>{
 	res.json({        
-        originalname: req.file.originalname
-	});
-	let filename=req.file.originalname;
-	
-	// 处理Excel
-	handleExcel(filename);	
-	
+		originalname: req.file.originalname,
+		path:req.file.path
+	});	
+
+	next();	
 }
 
 module.exports=upload;
